@@ -2,9 +2,9 @@ name: CI CalculatorMRF
 
 on:
     push:
-        branches: ["main"]
+        branches: [ "main" ]
     pull_request:
-        branches: ["main"]
+        branches: [ "main" ]
 
 permissions:
     contents: read
@@ -12,20 +12,17 @@ permissions:
 jobs:
     build:
         runs-on: ubuntu-latest
-
         steps:
-            - uses: actions/checkout@v6
-
+            - name: Checkout
+                uses: actions/checkout@v6
             - name: Se configura JDK 25 (Temurin)
               uses: actions/setup-java@v5
               with:
-                distribution: 'temurin'
-                java-version: '25'
+                distribution: temurin
+                java-version: "25"
                 check-latest: true
                 cache: gradle
-
             - name: Asegura que gradlew sea ejecutable
-              run: chmod +x gradlew
-
-            - name: Compilacion
-              run: .gradlew CompileJava                
+              run: chmod +x ./gradlew
+            - name: Compilación
+              run: ./gradlew compileJava              
